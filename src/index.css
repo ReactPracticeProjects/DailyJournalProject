@@ -1,0 +1,11 @@
+  @import "tailwindcss";
+
+  :root {
+    --color-darkprimary: #1f2937; 
+    --color-darksecondary: #111827; 
+    --color-buttonbg:#3b82f6;
+    --color-primaybg:#f9fafb;
+    --color-textcolor:#111827;
+    --color-sectext:#4b5563;
+    --color-ringlight:#2563eb;
+  }
