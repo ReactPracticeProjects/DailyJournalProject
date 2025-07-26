@@ -51,21 +51,22 @@ const NewJournal = () => {
     tagref.current.value = "";
   };
 
-  const onSubmit = (data) => {
-    // data.id = data.categoryselect.toUpperCase().substring(0, 3) + Math.floor(Math.random() * 900) + 100 + Date.now().toString().substring(9,13);
-    data.id =
-      data.categoryselect.toUpperCase().substring(0, 3) +
-      +(Math.floor(Math.random() * 90000) + 11000);
-    data.isPinned = false;
-    data.wordcount = wordcount;
-    data.updatedDate = data.date;
-    data.tags = tags;
+ const onSubmit = (data) => {
+  data.id =
+    data.categoryselect.toUpperCase().substring(0, 3) +
+    (Math.floor(Math.random() * 90000) + 11000);
+  data.isPinned = false;
+  data.wordcount = wordcount;
+  data.updatedDate = data.date;
+  data.tags = tags;
 
-    entries.push(data);
-    localStorage.setItem("journalEntry", JSON.stringify(entries));
-    setTags([]);
-    reset();
-  };
+  // Dispatch only (localStorage syncs in useEffect)
+  Journaldispatch({ type: "add_entry", payload: data });
+
+  setTags([]);
+  reset();
+  navigate("/");
+};
 
   return (
     <div className="px-20 py-10 max-w-5xl mx-auto">
