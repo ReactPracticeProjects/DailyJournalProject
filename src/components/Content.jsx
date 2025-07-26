@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Navbar from "./Navbar";
 import MainContent from "./MainContent";
 import { Route, Routes } from "react-router";
@@ -6,13 +6,17 @@ import NewJournal from "./NewJournal";
 import Trash from "./Trash";
 import Stats from "./Stats";
 import Calendar from "./Calendar";
+import { Theme } from "../context/ThemeContext";
 
 const Content = () => {
+  const [theme, setTheme] = useContext(Theme);
+
+
   return (
-    <div className="h-screen overflow-hidden">
+    <div className="">
       <Navbar />
 
-      <div className="w-full h-screen bg-[var(--color-darksecondary)] text-white text-5xl">
+      <div className={`${theme === "dark" ? "text-white bg-[var(--color-darksecondary)] " : "text-[var(--color-textcolor)]  bg-[var(--color-primaybg)]"} w-full`}>
         <Routes>
           <Route path="/" element={<MainContent />}></Route>
           <Route path="/new" element={<NewJournal />}></Route>

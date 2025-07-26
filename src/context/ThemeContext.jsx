@@ -7,7 +7,7 @@ const ThemeContext = ({children}) => {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("journalTheme");
-    console.log("Saved Theme is : " + savedTheme);
+    // console.log("Saved Theme is : " + savedTheme);
     if (savedTheme) {
       setTheme(savedTheme);
     }
@@ -15,7 +15,7 @@ const ThemeContext = ({children}) => {
 
   useEffect(() => {
     localStorage.setItem("journalTheme", theme);
-    console.log("Current Theme is : " + theme)
+    // console.log("Current Theme is : " + theme)
   }, [theme]);
 
   return (

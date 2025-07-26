@@ -1,22 +1,20 @@
 import React, { useContext } from "react";
-import { IoHomeOutline } from "react-icons/io5";
 import { IoMdAdd } from "react-icons/io";
-import { IoStatsChart } from "react-icons/io5";
-import { FaCalendarAlt } from "react-icons/fa";
-import { FaRegTrashAlt } from "react-icons/fa";
-import { MdOutlineDarkMode } from "react-icons/md";
-import { MdOutlineLightMode } from "react-icons/md";
-import { Link, NavLink } from "react-router";
+import { IoHomeOutline,IoStatsChart } from "react-icons/io5";
+import { FaCalendarAlt,FaRegTrashAlt } from "react-icons/fa";
+import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
+import {NavLink } from "react-router";
 import { Theme } from "../context/ThemeContext";
 
 const Navbar = () => {
   const [theme, setTheme] = useContext(Theme);
+  
 
   return (
     <div
       className={`${
         theme === "dark" ? "bg-[var(--color-darkprimary)]" : "bg-white"
-      } flex justify-around py-4`}
+      } flex justify-around py-4 border-b-2 border-b-blue-500 sticky top-0 left-0 w-full`}
     >
       <div className="leftitems flex space-x-5 items-center">
         <h1
