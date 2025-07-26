@@ -2,3 +2,7 @@ ${theme === "dark" ? "" : ""}
 
 
 ${theme === "dark" ? "text-white" : "text-[var(--color-textcolor)"}
+
+
+
+- learn more about forwardRef

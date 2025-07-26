@@ -1,10 +1,13 @@
 import { useContext, useRef, useState } from "react";
-import { Theme } from "../context/ThemeContext";
 import { IoSaveOutline } from "react-icons/io5";
 import { useNavigate } from "react-router";
-import { JournalEntryData } from "../context/JournalContext";
+import { JournalEntryData } from "../../context/JournalContext";
 import { useForm } from "react-hook-form";
-import { MdClear } from "react-icons/md";
+
+import MoodSelector from "./MoodSelector";
+import TagInput from "./TagInput";
+import WordCount from "./WordCount";
+import useTheme from "../../hooks/useTheme";
 
 const NewJournal = () => {
   const { register, reset, handleSubmit, watch, setValue } = useForm({
@@ -13,7 +16,7 @@ const NewJournal = () => {
     },
   });
 
-  const [theme, setTheme] = useContext(Theme);
+  const theme = useTheme();
   const navigate = useNavigate();
 
   const [{ entries, trashedEntries }, Journaldispatch] =
@@ -21,16 +24,15 @@ const NewJournal = () => {
 
   const tagref = useRef();
 
-  const moods = ["😊", "😢", "😡", "😴", "🤔", "😍", "😰", "🤗", "😎", "🤒"];
   const categories = ["Personal", "Work", "Travel", "Health", "Other"];
   const [emojiSelected, setemojiSelected] = useState("😊");
 
   const [wordcount, setwordcount] = useState(0);
 
   const handlewordCount = (e) => {
-    const value =  e.target.value
+    const value = e.target.value;
     const count = value.trim().split(" ").length;
-    setwordcount(count)
+    setwordcount(count);
   };
   const [tags, setTags] = useState([]);
 
@@ -137,101 +139,28 @@ const NewJournal = () => {
             </div>
           </div>
 
-          <div className="space-y-2">
-            <label htmlFor="mood">Mood</label>
-            <div className="flex gap-2 mt-2 flex-wrap">
-              {moods.map((emoji) => (
-                <button
-                  {...register("mood")}
-                  key={emoji}
-                  onClick={() => {
-                    setemojiSelected(emoji);
-                    setValue("mood", emoji);
-                  }}
-                  type="button"
-                  className={`${
-                    theme === "dark"
-                      ? "border-[var(--color-darkprimary)]"
-                      : "border-slate-300"
-                  } ${
-                    emojiSelected === emoji && "bg-blue-500"
-                  } rounded-md px-3 py-1 text-2xl border cursor-pointer`}
-                >
-                  {emoji}
-                </button>
-              ))}
-            </div>
-          </div>
+          <MoodSelector
+            setValue={setValue}
+            register={register}
+            theme={theme}
+            setemojiSelected={setemojiSelected}
+            emojiSelected={emojiSelected}
+          />
 
-          <div className="space-y-2">
-            <label htmlFor="tags">Tags</label>
+          <TagInput
+            handleTagChange={handleTagChange}
+            tags={tags}
+            handletagremove={handletagremove}
+            theme={theme}
+            ref={tagref}
+          />
 
-            {tags && tags.length > 0 ? (
-              <div className="flex my-2.5">
-                {" "}
-                {tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    onClick={() => handletagremove(index)}
-                    className={`
-${
-  theme === "dark"
-    ? "bg-[var(--color-darkprimary)]"
-    : "bg-slate-300 text-[#4b5563]"
-} flex items-center gap-4  w-fit px-2 py-1 ml-1 cursor-pointer  text-sm rounded-md`}
-                  >
-                    {tag} <MdClear />{" "}
-                  </span>
-                ))}{" "}
-              </div>
-            ) : (
-              ""
-            )}
-            <div className="grid mt-2 grid-cols-12 gap-2">
-              <input
-                ref={tagref}
-                className={`${
-                  theme === "dark"
-                    ? "border-[var(--color-darkprimary)] focus:ring-white focus:ring-offset-[var(--color-darkprimary)]"
-                    : "border-slate-300 focus:ring-blue-500"
-                } col-span-11 border w-full px-4 py-1.5 rounded-md placeholder:text-slate-400 outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 transition`}
-                type="text"
-                name="tags"
-                placeholder="Add a tag..."
-                id=""
-              />
-              <button
-                onClick={handleTagChange}
-                className="col-span-1 bg-blue-500 text-white  px-4 w-full cursor-pointer py-1.5 rounded-md"
-                type="button"
-              >
-                +
-              </button>
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <div className="flex justify-between">
-              <label htmlFor="journalContent">Content</label>
-              <p>{wordcount} words</p>
-            </div>
-
-            <textarea
-              {...register("content", {
-                onChange: (e) => {
-                  handlewordCount(e); // Call your handler
-                },
-              })}
-              placeholder="Write your journal entry here"
-              rows="7"
-              className={`${
-                theme === "dark"
-                  ? "border-[var(--color-darkprimary)] focus:ring-white focus:ring-offset-[var(--color-darkprimary)]"
-                  : "border-slate-300 focus:ring-blue-500"
-              } w-full border px-4 py-1.5 rounded-md placeholder:text-slate-400 outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 transition`}
-              id=""
-            ></textarea>
-          </div>
+          <WordCount
+            wordcount={wordcount}
+            register={register}
+            handlewordCount={handlewordCount}
+            theme={theme}
+          />
 
           <div className="grid grid-cols-12 gap-3 pt-2">
             <button
