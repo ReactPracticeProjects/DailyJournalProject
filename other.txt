@@ -6,3 +6,9 @@ ${theme === "dark" ? "text-white" : "text-[var(--color-textcolor)"}
 
 
 - learn more about forwardRef
+
+
+
+
+// minor change
+1. Minor change in JournalForm on tag input and button when we click enter it will automatically submitting the data

@@ -36,10 +36,10 @@ const TagInput = forwardRef(({ handleTagChange, tags, handletagremove, theme }, 
           name="tags"
           placeholder="Add a tag..."
         />
-        <button
+        <button type="button"
           onClick={handleTagChange}
           className="col-span-1 bg-blue-500 text-white px-4 w-full cursor-pointer py-1.5 rounded-md"
-          type="button"
+          
         >
           +
         </button>

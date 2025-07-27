@@ -17,12 +17,16 @@ const JournalContext = ({ children }) => {
   // 🔁 Fetch initial data from localStorage on mount
   useEffect(() => {
     const data = localStorage.getItem("journalEntry");
+    const trashData = localStorage.getItem("journalTrash");
+    
 
-    if (data) {
+    if (data && trashData) {
       const parsedData = JSON.parse(data);
+      const parsedTrashData = JSON.parse(trashData);
 
       // Dispatch the flat array to reducer
       Journaldispatch({ type: "add_entry", payload: parsedData });
+      Journaldispatch({type:"add_TrashEntry",payload:parsedTrashData})
     }
   }, []);
 
@@ -30,6 +34,10 @@ const JournalContext = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("journalEntry", JSON.stringify(Journalstate.entries));
   }, [Journalstate.entries]);
+
+  useEffect(()=>{
+    localStorage.setItem("journalTrash",JSON.stringify(Journalstate.trashedEntries))
+  },[[Journalstate.trashedEntries]])
 
   return (
     <JournalEntryData.Provider value={[Journalstate, Journaldispatch]}>

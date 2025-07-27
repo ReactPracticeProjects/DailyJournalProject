@@ -1,5 +1,5 @@
 import Navbar from "./Navbar";
-import MainContent from "./MainContent";
+import MainContent from "./HomePage/MainContent";
 import { Route, Routes } from "react-router";
 
 import Stats from "./Stats";
@@ -13,7 +13,7 @@ const Content = () => {
   const theme = useTheme();
 
   return (
-    <div className="">
+    <div className="min-h-screen">
       <Navbar />
 
       <div
