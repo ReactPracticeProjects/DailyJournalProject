@@ -10,14 +10,6 @@ import { JournalEntryData } from "../../context/JournalContext";
 const Card = ({ data, id, Journaldispatch }) => {
   const theme = useTheme();
 
-  const icons = [
-    <LuPinOff />,
-    <TiEdit />,
-    <RiDeleteBin6Line
-      onClick={() => Journaldispatch({ type: "setTrash", payload: id })}
-      className="text-red-500"
-    />,
-  ];
   const [showFullText, setShowFullText] = useState(false);
 
   return (
@@ -33,9 +25,9 @@ const Card = ({ data, id, Journaldispatch }) => {
       >
         <div className="flex items-center justify-between">
           <div>
-            <p className="font-semibold text-[18px]">{data.title}</p>
+            <p className="font-semibold text-[15px] sm:text-[18px]">{data.title}</p>
           </div>
-          <div className="flex text-[20px]  gap-2">
+          <div className="flex sm:text-[18px] md:text-[20px]  md:gap-2">
             <button
               className={`cursor-pointer hover:bg-slate-100 p-2 rounded-md`}
             >
@@ -57,21 +49,21 @@ const Card = ({ data, id, Journaldispatch }) => {
         </div>
 
         <div className="flex gap-3">
-          <p>{data.date}</p>
+          <p className="text-slate-500">{data.date}</p>
           <p>{data.mood}</p>
           <p
             className={` ${
               theme === "dark"
-                ? "bg-[var(--color-darksecondary)]"
-                : "bg-slate-100"
-            } px-[8px] font-semibold rounded-md py-[2px] text-sm`}
+                ? "bg-[var(--color-darksecondary)] "
+                : "bg-slate-100 text-slate-600"
+            } px-[8px] font-semibold text-slate-600 rounded-md py-[2px] text-sm`}
           >
             {data.categoryselect}
           </p>
         </div>
 
         <div className="flex-grow">
-          <p>
+          <p className="text-md">
             {showFullText
               ? data.content
               : `${data.content.slice(0, 100)}${

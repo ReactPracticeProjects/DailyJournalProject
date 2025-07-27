@@ -14,14 +14,14 @@ const TrashCard = ({ trashData,journalDispatch,id }) => {
         theme === "dark"
           ? "bg-[#020817] border border-[var(--color-darkprimary)]"
           : "bg-white border border-slate-300"
-      } rounded-md col-span-1 px-8 py-8  flex flex-col h-full gap-1`}
+      } rounded-md col-span-1 px-5 py-4 md:px-8 md:py-8  flex flex-col h-full gap-1`}
     >
       <div className="flex justify-between">
         <div>
-          <p className="text-lg font-semibold">{trashData.title}</p>
+          <p className="text-sm md:text-lg font-semibold">{trashData.title}</p>
         </div>
 
-        <div className="flex gap-2">
+        <div className="hidden sm:flex gap-2">
           <button onClick={()=>journalDispatch({type:"restore",payload:id})} className="flex items-center gap-3 border-[1px] text-green-600 border-green-400 font-semibold text-md px-3 py-1 rounded-md cursor-pointer">
             <MdOutlineRestore /> Restore
           </button>
@@ -47,6 +47,16 @@ const TrashCard = ({ trashData,journalDispatch,id }) => {
       </div>
 
       <div>{trashData.content}</div>
+
+        <div className="flex sm:hidden w-full gap-2 mt-2">
+          <button onClick={()=>journalDispatch({type:"restore",payload:id})} className="flex items-center gap-3 border-[1px] text-green-600 border-green-400 justify-center font-semibold text-[14px] w-full px-2 py-1 rounded-md cursor-pointer">
+            <MdOutlineRestore /> Restore
+          </button>
+          <button onClick={()=>journalDispatch({type:"deleteForever",payload:id})} className="flex items-center gap-3 border-[1px] text-red-600 border-red-400 font-semibold text-[14px] w-full text-md px-2 py-1 justify-center rounded-md cursor-pointer">
+            <RiDeleteBin6Line />
+            Delete Forever
+          </button>
+        </div>
     </div>
   );
 };

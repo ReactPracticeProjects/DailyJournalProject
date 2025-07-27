@@ -9,7 +9,7 @@ const Cards = () => {
     useContext(JournalEntryData);
 
   return (
-     <div className='grid grid-cols-3 gap-5 mt-5 '>
+     <div className='grid  md:grid-cols-2 xl:grid-cols-3 gap-5 mt-5'>
         {
           entries.map((JournalEntry,index)=>{
             return <Card key={JournalEntry.id} id={JournalEntry.id} Journaldispatch={Journaldispatch} data={JournalEntry}/>

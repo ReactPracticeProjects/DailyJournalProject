@@ -37,11 +37,9 @@ const NewJournal = () => {
   const [tags, setTags] = useState([]);
 
   const handletagremove = (tagindex) => {
-    const data = tags.filter((tagitem, index) => {
-      if (tagindex !== index) {
-        return tagitem;
-      }
-    });
+    // cleaner function
+   const data = tags.filter((_,index)=> index != tagindex)
+
     setTags(data);
   };
 
@@ -69,12 +67,12 @@ const NewJournal = () => {
 };
 
   return (
-    <div className="px-20 py-10 max-w-5xl mx-auto">
+    <div className="px-8 py-4  lg:px-20 lg:py-10 max-w-5xl mx-auto">
       <div className="flex flex-col gap-2 mb-6">
-        <p className="text-3xl font-semibold tracking-tighter">
+        <p className="text-xl md:text-2xl xl:text-3xl font-semibold tracking-tighter">
           New Journal Entry
         </p>
-        <p className="text-slate-500">Capture your thoughts and memories</p>
+        <p className="text-slate-500 text-sm md:text-md xl:text-[15px]">Capture your thoughts and memories</p>
       </div>
 
       <div
@@ -82,9 +80,9 @@ const NewJournal = () => {
           theme === "dark"
             ? "bg-[#020817] border border-[var(--color-darkprimary)]"
             : "bg-white border border-slate-300"
-        } rounded-lg px-10 py-8 space-y-6`}
+        } rounded-lg px-4 py-3 md:px-6 md:py-4 lg:px-10  lg:py-8 space-y-6`}
       >
-        <p className="text-2xl font-bold mb-2">New Entry</p>
+        <p className="text-lg md:text-xl xl:text-2xl font-bold mb-2">New Entry</p>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-2">
             <label htmlFor="title">Title</label>
@@ -94,14 +92,14 @@ const NewJournal = () => {
                 theme === "dark"
                   ? "border-[var(--color-darkprimary)] focus:ring-white focus:ring-offset-[var(--color-darkprimary)]"
                   : "border-slate-300 focus:ring-blue-500"
-              } border w-full px-4 mt-2 py-1.5 rounded-md placeholder:text-slate-400 outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 transition`}
+              } border w-full mt-2  px-2 py-1 md:px-4 md:py-1.5 rounded-md placeholder:text-slate-400 placeholder:text-sm md:placeholder:text-md  outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 transition`}
               type="text"
               placeholder="Enter a title for your entry..."
               id="title"
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <label htmlFor="date">Date</label>
               <input
@@ -110,7 +108,7 @@ const NewJournal = () => {
                   theme === "dark"
                     ? "border-[var(--color-darkprimary)] focus:ring-white focus:ring-offset-[var(--color-darkprimary)]"
                     : "border-slate-300 focus:ring-blue-500"
-                } border w-full mt-2 px-4 py-1.5 rounded-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 transition`}
+                } text-sm md:text-[15px]  border w-full mt-2 px-2 py-1 md:px-4 md:py-1.5 rounded-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 transition`}
                 type="date"
                 id=""
               />
@@ -124,7 +122,7 @@ const NewJournal = () => {
                   theme === "dark"
                     ? "border-[var(--color-darkprimary)] focus:ring-white focus:ring-offset-[var(--color-darkprimary)]"
                     : "border-slate-300 focus:ring-blue-500"
-                } border w-full mt-2 px-4 py-1.5 rounded-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 transition`}
+                } border text-sm md:text-[15px] w-full mt-2 px-2 py-1 md:px-4 md:py-1.5 rounded-md outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 transition`}
                 id=""
               >
                 {categories.map((categorie) => (
@@ -167,7 +165,7 @@ const NewJournal = () => {
             <button
               className={`${
                 theme === "dark" ? "text-white" : "text-black"
-              } col-span-10 bg-blue-500 py-2 hover:bg-blue-700 text-white rounded-md flex justify-center items-center gap-3 cursor-pointer`}
+              } col-span-8 md:col-span-9 bg-blue-500 py-2 hover:bg-blue-700 text-white rounded-md flex justify-center items-center gap-3 cursor-pointer`}
               type="submit"
             >
               <span>
@@ -179,7 +177,7 @@ const NewJournal = () => {
               onClick={() => navigate("/")}
               className={`${
                 theme === "dark" ? "text-white" : "text-black"
-              } border border-slate-300 py-2 col-span-2 rounded-md cursor-pointer hover:bg-slate-100`}
+              } border border-slate-300 py-2 col-span-4  md:col-span-3 rounded-md cursor-pointer hover:bg-slate-100`}
               type="button"
             >
               Cancel

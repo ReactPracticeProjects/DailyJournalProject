@@ -14,21 +14,21 @@ const Navbar = () => {
     <div
       className={`${
         theme === "dark" ? "bg-[var(--color-darkprimary)]" : "bg-white"
-      } flex justify-around py-4 border-b-2 border-b-blue-500 sticky top-0 left-0 w-full`}
+      } flex justify-around py-3 md:py-4 border-b-2 border-b-blue-500 sticky top-0 left-0 w-full`}
     >
       <div className="leftitems flex space-x-5 items-center">
         <h1
           className={`${
             theme === "dark" ? "text-white" : "text-[var(--color-textcolor)]"
-          } text-xl font-semibold`}
+          } text-lg md:text-xl font-semibold`}
         >
           📖 Daily Journal
         </h1>
         <div>
           <nav
-            className={`flex text-md space-x-5 items-center ${
+            className={`text-md space-x-5 items-center ${
               theme === "dark" ? "text-white/80" : "text-[var(--color-sectext)]"
-            } font-semibold`}
+            } font-semibold hidden md:flex`}
           >
             <NavLink
               className={(e) => {

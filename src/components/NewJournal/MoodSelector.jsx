@@ -22,7 +22,7 @@ const MoodSelector = ({theme,setemojiSelected,emojiSelected,register,setValue}) 
                   : "border-slate-300"
               } ${
                 emojiSelected === emoji && "bg-blue-500"
-              } rounded-md px-3 py-1 text-2xl border cursor-pointer`}
+              } rounded-md p-1 md:px-3 md:py-1 text-xl md:text-2xl border cursor-pointer`}
             >
               {emoji}
             </button>

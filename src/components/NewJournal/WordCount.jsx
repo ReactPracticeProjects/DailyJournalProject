@@ -21,7 +21,7 @@ const WordCount = ({wordcount,register,handlewordCount,theme}) => {
                 theme === "dark"
                   ? "border-[var(--color-darkprimary)] focus:ring-white focus:ring-offset-[var(--color-darkprimary)]"
                   : "border-slate-300 focus:ring-blue-500"
-              } w-full border px-4 py-1.5 rounded-md placeholder:text-slate-400 outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 transition`}
+              } w-full border px-2 py-1 placeholder:text-sm md:placeholder:text-md md:px-4 md:py-1.5 rounded-md placeholder:text-slate-400 outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 transition`}
               id=""
             ></textarea>
           </div>
