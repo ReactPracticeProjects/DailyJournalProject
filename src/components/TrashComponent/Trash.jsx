@@ -7,6 +7,7 @@ import useTheme from "../../hooks/useTheme";
 
 const Trash = () => {
   const [entry, trashentry, journalDispatch] = useJournalContext();
+ 
   const theme = useTheme();
   const trashentryCount = trashentry.length;
   return (

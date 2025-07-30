@@ -10,7 +10,7 @@ export const journalEntriesReducer = (state, action) => {
         entries: [...state.entries, ...entriesToAdd],
       };
 
-      case "add_TrashEntry":
+    case "add_TrashEntry":
       const entriesToAddTrash = Array.isArray(action.payload)
         ? action.payload
         : [action.payload];
@@ -18,6 +18,16 @@ export const journalEntriesReducer = (state, action) => {
       return {
         ...state,
         trashedEntries: [...state.trashedEntries, ...entriesToAddTrash],
+      };
+
+    case "toggle_pinned":
+      return {
+        ...state,
+        entries: state.entries.map(entry => 
+          entry.id === action.payload 
+            ? { ...entry, isPinned: !entry.isPinned }
+            : entry
+        ),
       };
 
     case "deleteForever":
@@ -31,9 +41,8 @@ export const journalEntriesReducer = (state, action) => {
             (item, index) => item.id !== action.payload
           ),
         };
-      }
-      else{
-        return state
+      } else {
+        return state;
       }
 
     case "restore":

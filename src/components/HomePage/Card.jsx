@@ -19,19 +19,24 @@ const Card = ({ data, id, Journaldispatch }) => {
       <div
         className={`${
           theme === "dark"
-            ? "bg-[#020817] border border-[var(--color-darkprimary)]"
-            : "bg-white border border-slate-300"
-        } rounded-md col-span-1 p-4  flex flex-col h-full gap-1`}
+            ? data.isPinned ? "bg-[#020817]  border-blue-500":" bg-[#020817] border-[var(--color-darkprimary)] "
+            : data.isPinned ? "bg-white border-blue-500" :  `bg-white  border-slate-300`
+        } ${
+          data.isPinned ? "border-blue-500" : "border-[var(--color-darkprimary)]"
+        }  border-[2px] rounded-md col-span-1 p-4  flex flex-col h-full gap-1`}
       >
         <div className="flex items-center justify-between">
           <div>
             <p className="font-semibold text-[15px] sm:text-[18px]">{data.title}</p>
           </div>
           <div className="flex sm:text-[18px] md:text-[20px]  md:gap-2">
-            <button
-              className={`cursor-pointer hover:bg-slate-100 p-2 rounded-md`}
+            <button 
+              onClick={() => Journaldispatch({type: "toggle_pinned", payload: id})}
+              className={`cursor-pointer hover:bg-slate-100 p-2 rounded-md ${
+                data.isPinned ? "text-blue-500" :  theme === "dark" ? "text-white":"text-black"
+              }`}
             >
-              <LuPinOff />
+              {data.isPinned ? <MdPushPin /> : <LuPinOff />}
             </button>
             <button
               className={`cursor-pointer hover:bg-slate-100 p-2 rounded-md`}
