@@ -22,7 +22,7 @@ const Cards = ({searchTerm}) => {
   console.log(filteredData)
 
   return (
-     <div className='grid  md:grid-cols-2 xl:grid-cols-3 gap-5 mt-5'>
+     <div className='grid pb-10  md:grid-cols-2 xl:grid-cols-3 gap-5 mt-5'>
       
         { filteredData !== false ? filteredData.length === 0 ? (<h1>Nothing to show here with the match</h1>) : filteredData.map((filterentry,index)=> <Card key={filterentry.id} id={filterentry.id} Journaldispatch={Journaldispatch} data={filterentry}/>
         ):

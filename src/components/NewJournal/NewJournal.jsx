@@ -67,7 +67,7 @@ const NewJournal = () => {
 };
 
   return (
-    <div className="px-8 py-4  lg:px-20 lg:py-10 max-w-5xl mx-auto">
+    <div className="px-8 py-4 pb-18 lg:px-20 lg:py-10 max-w-5xl mx-auto">
       <div className="flex flex-col gap-2 mb-6">
         <p className="text-xl md:text-2xl xl:text-3xl font-semibold tracking-tighter">
           New Journal Entry

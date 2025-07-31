@@ -11,7 +11,7 @@ const Trash = () => {
   const theme = useTheme();
   const trashentryCount = trashentry.length;
   return (
-    <div className="px-5 py-7 md:px-10 lg:px-10  xl:px-30 xl:py-10 mx-auto max-w-8xl flex-col flex-grow min-h-screen">
+    <div className="px-5 py-7 md:px-10 lg:px-10  xl:px-30 xl:py-10 pb-18 mx-auto max-w-8xl flex-col flex-grow min-h-screen">
       <div className="flex flex-col space-y-2">
         <p className="text-3xl font-semibold">Trash</p>
         <p className="text-slate-500">{trashentryCount} deleted Entry</p>
