@@ -39,9 +39,9 @@ const MainContent = () => {
             onClick={() => navigate("/new")}
             className={`${
               theme === "light"
-                ? "bg-blue-600 text-white"
-                : "bg-blue-500 text-[var(--color-darkprimary)]"
-            } flex items-center gap-4 px-2 py-1 text-sm sm:py-2.5 md:text-md  md:px-3 md:py-3 rounded-md justify-center cursor-pointer`}
+                ? "bg-blue-600"
+                : "bg-blue-500 "
+            } hover:bg-blue-700 text-white flex items-center gap-4 px-2 py-1 text-sm sm:py-2.5 md:text-md  md:px-3 md:py-3 rounded-md justify-center cursor-pointer`}
           >
             <IoMdAdd />
             <span>New Entry</span>

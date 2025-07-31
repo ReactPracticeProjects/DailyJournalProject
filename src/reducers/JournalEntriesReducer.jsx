@@ -74,6 +74,15 @@ export const journalEntriesReducer = (state, action) => {
       };
     }
 
+    case "update_entry":{
+      console.log(action.itemid)
+      console.log(action.payload)
+      return {
+        ...state,
+        entries: state.entries.map((item,index)=>item.id === action.itemid ? action.payload : item)
+      }
+    }
+
     default:
       return state;
   }
