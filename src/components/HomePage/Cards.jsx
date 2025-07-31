@@ -19,7 +19,7 @@ const Cards = ({searchTerm}) => {
 
 
   const filteredData = searchTerm !== "" && entries.filter((item,index)=>item.title.toLowerCase().includes(searchTerm) || item.content.toLowerCase().includes(searchTerm) )
-
+  console.log(filteredData)
 
   return (
      <div className='grid pb-10  md:grid-cols-2 xl:grid-cols-3 gap-5 mt-5'>

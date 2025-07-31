@@ -83,7 +83,7 @@ const NewJournal = () => {
         } rounded-lg px-4 py-3 md:px-6 md:py-4 lg:px-10  lg:py-8 space-y-6`}
       >
         <p className="text-lg md:text-xl xl:text-2xl font-bold mb-2">New Entry</p>
-        <div  className="space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-2">
             <label htmlFor="title">Title</label>
             <input
@@ -163,7 +163,6 @@ const NewJournal = () => {
 
           <div className="grid grid-cols-12 gap-3 pt-2">
             <button
-            onClick={handleSubmit(onSubmit)}
               className={`${
                 theme === "dark" ? "text-white" : "text-black"
               } col-span-8 md:col-span-9 bg-blue-500 py-2 hover:bg-blue-700 text-white rounded-md flex justify-center items-center gap-3 cursor-pointer`}
@@ -184,7 +183,7 @@ const NewJournal = () => {
               Cancel
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
