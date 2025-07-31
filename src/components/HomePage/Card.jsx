@@ -6,11 +6,20 @@ import { TiEdit } from "react-icons/ti";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import useTheme from "../../hooks/useTheme";
 import { JournalEntryData } from "../../context/JournalContext";
+import { useNavigate } from "react-router";
 
 const Card = ({ data, id, Journaldispatch }) => {
   const theme = useTheme();
 
+  const navigate = useNavigate();
+
   const [showFullText, setShowFullText] = useState(false);
+
+  const handleEditForm = (editid)=>{
+    navigate(`/edit/${editid}`)
+    
+
+  }
 
   return (
     <>
@@ -38,7 +47,7 @@ const Card = ({ data, id, Journaldispatch }) => {
             >
               {data.isPinned ? <MdPushPin /> : <LuPinOff />}
             </button>
-            <button
+            <button onClick={(e)=>handleEditForm(data.id,e)}
               className={`cursor-pointer hover:bg-slate-100 p-2 rounded-md`}
             >
               {" "}

@@ -8,6 +8,7 @@ import Calendar from "./Calendar";
 import NewJournal from "./NewJournal/NewJournal";
 import useTheme from "../hooks/useTheme";
 import Trash from "./TrashComponent/Trash";
+import EditForm from "./EditJournal/EditForm";
 
 const Content = () => {
   const theme = useTheme();
@@ -27,6 +28,7 @@ const Content = () => {
           <Route path="/" element={<MainContent />}></Route>
           <Route path="/new" element={<NewJournal />}></Route>
           <Route path="/stats" element={<Stats />}></Route>
+          <Route path="/edit/:editid" element={<EditForm />}></Route>
           <Route path="/calendar" element={<Calendar />}></Route>
           <Route path="/trash" element={<Trash />}></Route>
         </Routes>
