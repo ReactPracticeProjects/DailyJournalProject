@@ -1,19 +1,31 @@
 import { IoMdAdd } from "react-icons/io";
 import useTheme from "../../hooks/useTheme";
 import { useNavigate } from "react-router";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { JournalEntryData } from "../../context/JournalContext";
 import Card from "./Card";
 import Cards from "./Cards";
+import FilterSearch from "./FilterSearch";
 
 const MainContent = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const [searchTerm,setSearchTerm] = useState("");
+  
+  const handleSearchTerm = (e)=>{
+    setSearchTerm(e.target.value.toLowerCase());
+  }
+
+  const removeSearchTerm = ()=>{
+    setSearchTerm("");
+  }
 
   const [{ entries, trashedEntries }, Journaldispatch] =
     useContext(JournalEntryData);
 
   const entryCount = entries.length;
+
+ 
 
   return (
     <div className="px-5 py-7 md:px-10 lg:px-10  xl:px-30 xl:py-10 mx-auto max-w-8xl flex-col flex-grow min-h-screen">
@@ -37,13 +49,17 @@ const MainContent = () => {
         </div>
       </div>
 
+      <div>
+        <FilterSearch searchTerm={searchTerm} removeSearchTerm={removeSearchTerm} handleSearchTerm={handleSearchTerm}/>
+      </div>
+
       {entryCount > 0 ? (
-        <Cards />
+        <Cards searchTerm={searchTerm} />
       ) : (
         <div className="flex flex-col gap-3 items-center justify-center h-[350px]">
           <span className="text-6xl">📝</span>
           <p className="font-semibold text-xl">No Entries yet</p>
-          <p className="text-slate-500 text-md">
+          <p className="text-slate-500 text-md text-center">
             Start your journaling journey by creating your first entry.
           </p>
           <div>
