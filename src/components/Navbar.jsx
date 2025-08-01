@@ -4,10 +4,11 @@ import { IoHomeOutline, IoStatsChart } from "react-icons/io5";
 import { FaCalendarAlt, FaRegTrashAlt } from "react-icons/fa";
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import { NavLink } from "react-router";
-import { Theme } from "../context/ThemeContext";
+import {Theme}  from "../context/ThemeContext";
 
 const Navbar = () => {
   const [theme, setTheme] = useContext(Theme);
+  console.log(theme,setTheme)
 
   return (
     <>

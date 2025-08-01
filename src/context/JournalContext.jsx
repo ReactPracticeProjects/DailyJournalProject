@@ -19,30 +19,44 @@ const JournalContext = ({ children }) => {
     const data = localStorage.getItem("journalEntry");
     const trashData = localStorage.getItem("journalTrash");
 
-    if (data && trashData) {
-      const parsedData = JSON.parse(data);
-      const parsedTrashData = JSON.parse(trashData);
+    // Load entries if they exist
+    if (data) {
+      try {
+        const parsedData = JSON.parse(data);
+        // Ensure all entries have isPinned property
+        const entriesWithPinned = parsedData.map(entry => ({
+          ...entry,
+          isPinned: entry.isPinned !== undefined ? entry.isPinned : false
+        }));
+        Journaldispatch({ type: "add_entry", payload: entriesWithPinned });
+      } catch (error) {
+        console.error("Error parsing journal entries:", error);
+      }
+    }
 
-      // Ensure all entries have isPinned property
-      const entriesWithPinned = parsedData.map(entry => ({
-        ...entry,
-        isPinned: entry.isPinned !== undefined ? entry.isPinned : false
-      }));
-
-      // Dispatch the flat array to reducer
-      Journaldispatch({ type: "add_entry", payload: entriesWithPinned });
-      Journaldispatch({type:"add_TrashEntry",payload:parsedTrashData})
+    // Load trash data if it exists
+    if (trashData) {
+      try {
+        const parsedTrashData = JSON.parse(trashData);
+        Journaldispatch({ type: "add_TrashEntry", payload: parsedTrashData });
+      } catch (error) {
+        console.error("Error parsing trash data:", error);
+      }
     }
   }, []);
 
-  // 💾 Optional but better: Sync to localStorage when state changes
+  // 💾 Sync to localStorage when state changes (only if not empty)
   useEffect(() => {
-    localStorage.setItem("journalEntry", JSON.stringify(Journalstate.entries));
+    if (Journalstate.entries.length > 0) {
+      localStorage.setItem("journalEntry", JSON.stringify(Journalstate.entries));
+    }
   }, [Journalstate.entries]);
 
-  useEffect(()=>{
-    localStorage.setItem("journalTrash",JSON.stringify(Journalstate.trashedEntries))
-  },[Journalstate.trashedEntries])
+  useEffect(() => {
+    if (Journalstate.trashedEntries.length > 0) {
+      localStorage.setItem("journalTrash", JSON.stringify(Journalstate.trashedEntries));
+    }
+  }, [Journalstate.trashedEntries]);
 
   return (
     <JournalEntryData.Provider value={[Journalstate, Journaldispatch]}>
