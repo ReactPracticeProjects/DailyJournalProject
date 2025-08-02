@@ -83,6 +83,20 @@ export const journalEntriesReducer = (state, action) => {
       }
     }
 
+    case "add_draft":{
+      return {
+        ...state,
+        draft:  action.payload,
+      };
+    }
+
+    case "clear_draft":{
+      return {
+        ...state,
+        draft: [],
+      };
+    }
+
     default:
       return state;
   }
