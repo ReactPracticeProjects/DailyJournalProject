@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import useTheme from "../../hooks/useTheme";
 import { IoSaveOutline } from "react-icons/io5";
@@ -14,7 +14,13 @@ const EditForm = () => {
   const { editid } = useParams();
   const navigate = useNavigate();
   const tagref = useRef();
+  const [wordcount, setwordcount] = useState(0);
   const [tags, setTags] = useState([]);
+  const handlewordCount = (e) => {
+    const value = e.target.value;
+    const count = value.trim().split(" ").length;
+    setwordcount(count);
+  };
   const handletagremove = (tagindex) => {
     // cleaner function
     const data = tags.filter((_, index) => index != tagindex);
@@ -28,9 +34,9 @@ const EditForm = () => {
     tagref.current.value = "";
   };
 
-  const [entries, trashedEntries, Journaldispatch] = useJournalContext();
+  const [entries,, Journaldispatch] = useJournalContext();
 
-  const data = entries.find((item, index) => item.id === editid);
+  const data = entries.find((item) => item.id === editid);
 
   const { register, handleSubmit, setValue,reset } = useForm();
 
@@ -41,6 +47,7 @@ const EditForm = () => {
       setValue("date", data.date);
       setValue("categoryselect", data.categoryselect);
       setemojiSelected(data.mood);
+      setwordcount(data.wordcount);
 
       setTags(data.tags);
     }
@@ -52,8 +59,8 @@ const EditForm = () => {
     editvaludeData.id =
       editvaludeData.categoryselect.toUpperCase().substring(0, 3) +
       (Math.floor(Math.random() * 90000) + 11000);
-    editvaludeData.isPinned = false;
-    editvaludeData.wordcount = data.wordcount;
+    editvaludeData.isPinned = data.isPinned;
+    editvaludeData.wordcount = wordcount;
     editvaludeData.updatedDate = data.date;
     editvaludeData.tags = tags;
     editvaludeData.mood = emojiSelected;
@@ -220,17 +227,17 @@ const EditForm = () => {
         </div>
 
         <div className="space-y-2">
-          <div className="flex justify-between">
-            <label htmlFor="journalContent">Content</label>
-            <p>0 words</p>
-          </div>
+        <div className="flex justify-between">
+              <label htmlFor="journalContent">Content</label>
+              <p>{wordcount} words</p>
+            </div>
 
           <textarea
-            // {...register("content", {
-            //   onChange: (e) => {
-            //     handlewordCount(e); // Call your handler
-            //   },
-            // })}
+            {...register("content", {
+              onChange: (e) => {
+                handlewordCount(e); // Call your handler
+              },
+            })}
             {...register("content")}
             placeholder="Write your journal entry here"
             rows="7"

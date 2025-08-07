@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { MdOutlinePushPin } from "react-icons/md";
 import { MdPushPin } from "react-icons/md";
 import { LuPinOff } from "react-icons/lu";
@@ -41,20 +41,20 @@ const Card = ({ data, id, Journaldispatch }) => {
           <div className="flex sm:text-[18px] md:text-[20px]  md:gap-2">
             <button 
               onClick={() => Journaldispatch({type: "toggle_pinned", payload: id})}
-              className={`cursor-pointer hover:bg-slate-100 p-2 rounded-md ${
+              className={`cursor-pointer ${theme === "dark" ? "hover:bg-slate-800" : "hover:bg-slate-100"} p-2 rounded-md ${
                 data.isPinned ? "text-blue-500" :  theme === "dark" ? "text-white":"text-black"
               }`}
             >
               {data.isPinned ? <MdPushPin /> : <LuPinOff />}
             </button>
             <button onClick={(e)=>handleEditForm(data.id,e)}
-              className={`cursor-pointer hover:bg-slate-100 p-2 rounded-md`}
+              className={`cursor-pointer ${theme === "dark" ? "hover:bg-slate-800" : "hover:bg-slate-100"}  p-2 rounded-md`}
             >
               {" "}
               <TiEdit />
             </button>
             <button
-              className={`cursor-pointer hover:bg-slate-100 p-2 rounded-md`}
+              className={`cursor-pointer  ${theme === "dark" ? "hover:bg-slate-800" : "hover:bg-slate-100"} p-2 rounded-md`}
               onClick={() => Journaldispatch({ type: "setTrash", payload: id })}
             >
               <RiDeleteBin6Line className="text-red-500" />

@@ -1,12 +1,11 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Features To Be Implemented
+ - on hover edit and pin - dark mode not matching - ✅
+ - change default theme from light to dark - ✅
+ - In the EditForm Word Counte is missing we are just assining the manual count - ✅
+ - use draft to save the changes after a time of interval
+ - Form Validatin on newJournalFOrm as well as edit Form using react hook form
+ - Filter by category and by mood option need to be added
+ - tags must be limit only 3 tags 
+ - tags did not have any space 
+ - Date validation and date calendar picker color issue must be solved
+ - in the  editform word count is showing 1 extra word i know why
