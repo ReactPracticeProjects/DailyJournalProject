@@ -23,39 +23,30 @@ export const journalEntriesReducer = (state, action) => {
     case "toggle_pinned":
       return {
         ...state,
-        entries: state.entries.map(entry => 
-          entry.id === action.payload 
+        entries: state.entries.map((entry) =>
+          entry.id === action.payload
             ? { ...entry, isPinned: !entry.isPinned }
             : entry
         ),
       };
 
     case "deleteForever":
-      const userConfirmed = confirm(
-        "Are you sure you want to delete this item?"
-      );
-      if (userConfirmed) {
-        return {
-          ...state,
-          trashedEntries: state.trashedEntries.filter(
-            (item, index) => item.id !== action.payload
-          ),
-        };
-      } else {
-        return state;
-      }
+      return {
+        ...state,
+        trashedEntries: state.trashedEntries.filter(
+          (item) => item.id !== action.payload
+        ),
+      };
 
     case "restore":
       return {
         ...state,
         entries: [
           ...state.entries,
-          state.trashedEntries.find(
-            (item, index) => item.id === action.payload
-          ),
+          state.trashedEntries.find((item) => item.id === action.payload),
         ],
         trashedEntries: state.trashedEntries.filter(
-          (item, index) => item.id !== action.payload
+          (item) => item.id !== action.payload
         ),
       };
 
@@ -66,34 +57,20 @@ export const journalEntriesReducer = (state, action) => {
         ...state,
         trashedEntries: [
           ...state.trashedEntries,
-          state.entries.find((item, index) => item.id === action.payload),
+          state.entries.find((item) => item.id === action.payload),
         ],
-        entries: state.entries.filter(
-          (item, index) => item.id !== action.payload
+        entries: state.entries.filter((item) => item.id !== action.payload),
+      };
+    }
+
+    case "update_entry": {
+      console.log(action.itemid);
+      console.log(action.payload);
+      return {
+        ...state,
+        entries: state.entries.map((item) =>
+          item.id === action.itemid ? action.payload : item
         ),
-      };
-    }
-
-    case "update_entry":{
-      console.log(action.itemid)
-      console.log(action.payload)
-      return {
-        ...state,
-        entries: state.entries.map((item,index)=>item.id === action.itemid ? action.payload : item)
-      }
-    }
-
-    case "add_draft":{
-      return {
-        ...state,
-        draft:  action.payload,
-      };
-    }
-
-    case "clear_draft":{
-      return {
-        ...state,
-        draft: [],
       };
     }
 

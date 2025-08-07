@@ -1,12 +1,16 @@
-import React, { useContext } from "react";
 import useTheme from "../../hooks/useTheme";
 import { MdOutlineRestore } from "react-icons/md";
-import { JournalEntryData } from "../../context/JournalContext";
-import useJournalContext from "../../hooks/useJournalContext";
+
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-const TrashCard = ({ trashData,journalDispatch,id }) => {
+const TrashCard = ({ trashData, journalDispatch, id }) => {
   const theme = useTheme();
+
+  const handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this item?")) {
+      journalDispatch({ type: "deleteForever", payload: id });
+    }
+  };
 
   return (
     <div
@@ -22,10 +26,16 @@ const TrashCard = ({ trashData,journalDispatch,id }) => {
         </div>
 
         <div className="hidden sm:flex gap-2">
-          <button onClick={()=>journalDispatch({type:"restore",payload:id})} className="flex items-center gap-3 border-[1px] text-green-600 border-green-400 font-semibold text-md px-3 py-1 rounded-md cursor-pointer">
+          <button
+            onClick={() => journalDispatch({ type: "restore", payload: id })}
+            className="flex items-center gap-3 border-[1px] text-green-600 border-green-400 font-semibold text-md px-3 py-1 rounded-md cursor-pointer"
+          >
             <MdOutlineRestore /> Restore
           </button>
-          <button onClick={()=>journalDispatch({type:"deleteForever",payload:id})} className="flex items-center gap-3 border-[1px] text-red-600 border-red-400 font-semibold text-md px-3 py-1 rounded-md cursor-pointer">
+          <button
+            onClick={() => handleDelete(id)}
+            className="flex items-center gap-3 border-[1px] text-red-600 border-red-400 font-semibold text-md px-3 py-1 rounded-md cursor-pointer"
+          >
             <RiDeleteBin6Line />
             Delete Forever
           </button>
@@ -48,15 +58,21 @@ const TrashCard = ({ trashData,journalDispatch,id }) => {
 
       <div>{trashData.content}</div>
 
-        <div className="flex sm:hidden w-full gap-2 mt-2">
-          <button onClick={()=>journalDispatch({type:"restore",payload:id})} className="flex items-center gap-3 border-[1px] text-green-600 border-green-400 justify-center font-semibold text-[14px] w-full px-2 py-1 rounded-md cursor-pointer">
-            <MdOutlineRestore /> Restore
-          </button>
-          <button onClick={()=>journalDispatch({type:"deleteForever",payload:id})} className="flex items-center gap-3 border-[1px] text-red-600 border-red-400 font-semibold text-[14px] w-full text-md px-2 py-1 justify-center rounded-md cursor-pointer">
-            <RiDeleteBin6Line />
-            Delete Forever
-          </button>
-        </div>
+      <div className="flex sm:hidden w-full gap-2 mt-2">
+        <button
+          onClick={() => journalDispatch({ type: "restore", payload: id })}
+          className="flex items-center gap-3 border-[1px] text-green-600 border-green-400 justify-center font-semibold text-[14px] w-full px-2 py-1 rounded-md cursor-pointer"
+        >
+          <MdOutlineRestore /> Restore
+        </button>
+        <button
+          onClick={() => handleDelete(id)}
+          className="flex items-center gap-3 border-[1px] text-red-600 border-red-400 font-semibold text-[14px] w-full text-md px-2 py-1 justify-center rounded-md cursor-pointer"
+        >
+          <RiDeleteBin6Line />
+          Delete Forever
+        </button>
+      </div>
     </div>
   );
 };

@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { JournalEntryData } from "../context/JournalContext";
 
 const useJournalContext = () => {
-  const [{ entries, trashedEntries, draft }, Journaldispatch] =
+  const [{ entries, trashedEntries }, Journaldispatch] =
     useContext(JournalEntryData);
 
-  return [entries, trashedEntries, draft, Journaldispatch];
+  return [entries, trashedEntries, Journaldispatch];
 };
 
 export default useJournalContext;

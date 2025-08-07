@@ -1,0 +1,11 @@
+Features To Be Implemented
+ - on hover edit and pin - dark mode not matching - ✅
+ - change default theme from light to dark - ✅
+ - In the EditForm Word Counte is missing we are just assining the manual count - ✅
+ - use draft to save the changes after a time of interval
+ - Form Validatin on newJournalFOrm as well as edit Form using react hook form
+ - Filter by category and by mood option need to be added
+ - tags must be limit only 3 tags 
+ - tags did not have any space 
+ - Date validation and date calendar picker color issue must be solved
+ - in the  editform word count is showing 1 extra word i know why

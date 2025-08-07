@@ -3,12 +3,12 @@ import React from "react";
 import Card from "../HomePage/Card";
 import TrashCard from "./TrashCard";
 import useJournalContext from "../../hooks/useJournalContext";
-import useTheme from "../../hooks/useTheme";
+
 
 const Trash = () => {
-  const [entry, trashentry,draft, journalDispatch] = useJournalContext();
+  const [, trashentry,journalDispatch] = useJournalContext();
  
-  const theme = useTheme();
+  
   const trashentryCount = trashentry.length;
   return (
     <div className="px-5 py-7 md:px-10 lg:px-10  xl:px-30 xl:py-10 pb-18 mx-auto max-w-8xl flex-col flex-grow min-h-screen">
@@ -20,7 +20,7 @@ const Trash = () => {
       <div>
         <div className="grid grid-cols-1 gap-3 mt-4">
           {trashentryCount > 0 ? (
-            trashentry.map((trashData, index) => {
+            trashentry.map((trashData) => {
               return (
                 <TrashCard key={trashData.id}
                   trashData={trashData}

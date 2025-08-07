@@ -34,11 +34,11 @@ const EditForm = () => {
     tagref.current.value = "";
   };
 
-  const [entries,, Journaldispatch] = useJournalContext();
-
+  const [entries, , Journaldispatch] = useJournalContext();
+  console.log(Journaldispatch);
   const data = entries.find((item) => item.id === editid);
 
-  const { register, handleSubmit, setValue,reset } = useForm();
+  const { register, handleSubmit, setValue, reset } = useForm();
 
   useEffect(() => {
     if (data) {
@@ -64,6 +64,7 @@ const EditForm = () => {
     editvaludeData.updatedDate = data.date;
     editvaludeData.tags = tags;
     editvaludeData.mood = emojiSelected;
+    console.log(editvaludeData);
     Journaldispatch({
       type: "update_entry",
       payload: editvaludeData,
@@ -227,10 +228,10 @@ const EditForm = () => {
         </div>
 
         <div className="space-y-2">
-        <div className="flex justify-between">
-              <label htmlFor="journalContent">Content</label>
-              <p>{wordcount} words</p>
-            </div>
+          <div className="flex justify-between">
+            <label htmlFor="journalContent">Content</label>
+            <p>{wordcount} words</p>
+          </div>
 
           <textarea
             {...register("content", {

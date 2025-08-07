@@ -6,7 +6,6 @@ export const JournalEntryData = createContext();
 const initialState = {
   entries: [],
   trashedEntries: [],
-  draft:[],
 };
 
 const JournalContext = ({ children }) => {
@@ -19,7 +18,7 @@ const JournalContext = ({ children }) => {
   useEffect(() => {
     const data = localStorage.getItem("journalEntry");
     const trashData = localStorage.getItem("journalTrash");
-    const draftData = localStorage.getItem("journalDraft");
+   
 
     // Load entries if they exist
     if (data) {
@@ -36,14 +35,7 @@ const JournalContext = ({ children }) => {
       }
     }
 
-    if (draftData) {
-      try {
-        const parsedDraftData = JSON.parse(draftData);
-        Journaldispatch({ type: "add_draft", payload: parsedDraftData });
-      } catch (error) {
-        console.error("Error parsing draft data:", error);
-      }
-    }
+   
 
     // Load trash data if it exists
     if (trashData) {
@@ -56,24 +48,16 @@ const JournalContext = ({ children }) => {
     }
   }, []);
 
-  // 💾 Sync to localStorage when state changes (only if not empty)
+  // 💾 Sync to localStorage when state changes (always update, even if empty)
   useEffect(() => {
-    if (Journalstate.entries.length > 0) {
-      localStorage.setItem("journalEntry", JSON.stringify(Journalstate.entries));
-    }
+    localStorage.setItem("journalEntry", JSON.stringify(Journalstate.entries));
   }, [Journalstate.entries]);
 
   useEffect(() => {
-    if (Journalstate.trashedEntries.length > 0) {
-      localStorage.setItem("journalTrash", JSON.stringify(Journalstate.trashedEntries));
-    }
+    localStorage.setItem("journalTrash", JSON.stringify(Journalstate.trashedEntries));
   }, [Journalstate.trashedEntries]);
 
-  useEffect(() => {
-    if (Journalstate.draft.length > 0) {
-      localStorage.setItem("journalDraft", JSON.stringify(Journalstate.draft));
-    }
-  }, [Journalstate.draft]);
+
 
   return (
     <JournalEntryData.Provider value={[Journalstate, Journaldispatch]}>
