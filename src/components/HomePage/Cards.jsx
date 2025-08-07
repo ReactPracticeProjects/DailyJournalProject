@@ -3,7 +3,7 @@ import Card from './Card'
 import { JournalEntryData } from '../../context/JournalContext';
 
 const Cards = ({searchTerm}) => {
-  const [{ entries, trashedEntries }, Journaldispatch] =
+  const [{ entries,}, Journaldispatch] =
     useContext(JournalEntryData);
 
   
@@ -32,12 +32,12 @@ const Cards = ({searchTerm}) => {
             <h1 className="text-lg font-semibold text-gray-600">No entries found matching "{searchTerm}"</h1>
           </div>
         ) : (
-          filteredData.map((filterentry, index) => (
+          filteredData.map((filterentry) => (
             <Card key={filterentry.id} id={filterentry.id} Journaldispatch={Journaldispatch} data={filterentry}/>
           ))
         )
       ) : (
-        sortedEntries.map((JournalEntry, index) => (
+        sortedEntries.map((JournalEntry) => (
           <Card key={JournalEntry.id} id={JournalEntry.id} Journaldispatch={Journaldispatch} data={JournalEntry}/>
         ))
       )}

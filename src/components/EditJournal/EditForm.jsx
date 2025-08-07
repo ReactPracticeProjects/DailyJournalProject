@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import useTheme from "../../hooks/useTheme";
 import { IoSaveOutline } from "react-icons/io5";
@@ -34,9 +34,9 @@ const EditForm = () => {
     tagref.current.value = "";
   };
 
-  const [entries, trashedEntries, Journaldispatch] = useJournalContext();
+  const [entries,, Journaldispatch] = useJournalContext();
 
-  const data = entries.find((item, index) => item.id === editid);
+  const data = entries.find((item) => item.id === editid);
 
   const { register, handleSubmit, setValue,reset } = useForm();
 
