@@ -28,9 +28,9 @@ const TagInput = forwardRef(
         <div className="grid mt-2 grid-cols-12 gap-2">
           <input
             onKeyDown={(e) =>{
-              console.log(e.key); 
+             
             
-              e.key === "Enter" ? handleTagChange():console.log("hello")}
+              e.key === "Enter" ? handleTagChange():""}
             }
             ref={tagref}
             className={`${

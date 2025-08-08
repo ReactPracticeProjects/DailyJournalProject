@@ -8,7 +8,7 @@ import {Theme}  from "../context/ThemeContext";
 
 const Navbar = () => {
   const [theme, setTheme] = useContext(Theme);
-  console.log(theme,setTheme)
+  
 
   return (
     <>

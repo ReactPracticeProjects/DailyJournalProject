@@ -4,7 +4,7 @@ import { CiFilter } from "react-icons/ci";
 import { CiSearch } from "react-icons/ci";
 import { MdClear } from "react-icons/md";
 
-function FilterSearch({searchTerm, handleSearchTerm,removeSearchTerm }) {
+function FilterSearch({searchTerm, handleSearchTerm,removeSearchTerm ,getData}) {
   const theme = useTheme();
 
   return (
@@ -31,7 +31,7 @@ function FilterSearch({searchTerm, handleSearchTerm,removeSearchTerm }) {
         </button>
       </div>
 
-      <button
+      <button onClick={()=>getData()}
         className={`${
           theme === "dark"
             ? "bg-[#020817] border-[var(--color-darkprimary)] hover:bg-[var(--color-darkprimary)]"
