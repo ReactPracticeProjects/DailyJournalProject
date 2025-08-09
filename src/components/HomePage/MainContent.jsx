@@ -1,7 +1,7 @@
 import { IoMdAdd } from "react-icons/io";
 import useTheme from "../../hooks/useTheme";
 import { useNavigate } from "react-router";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import useJournalContext from "../../hooks/useJournalContext";
 
 import Cards from "./Cards";
@@ -10,6 +10,8 @@ import FilterSearch from "./FilterSearch";
 // firebase
 import { collection, getDocs } from "firebase/firestore";
 import { database } from "../../firebaseConfig";
+import { AuthContext } from "../../context/AuthProvider";
+import { Navigate } from "react-router";
 
 const MainContent = () => {
   const theme = useTheme();
@@ -31,8 +33,14 @@ const MainContent = () => {
   // firebase firestore
   const entryCollectionRef = collection(database, "entries");
   const getData = () => {
-    getDocs(entryCollectionRef).then((response) => console.log(response.docs.map((item)=>console.log(item.data()))));
+    getDocs(entryCollectionRef).then((response) =>
+      console.log(response.docs.map((item) => console.log(item.data())))
+    );
   };
+
+  const { user } = useContext(AuthContext);
+
+  if (!user) return <Navigate to="/login" />;
 
   return (
     <div className="px-5 py-7 md:px-10 lg:px-10  xl:px-30 xl:py-10 mx-auto max-w-8xl flex-col flex-grow min-h-screen">

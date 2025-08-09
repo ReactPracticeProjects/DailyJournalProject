@@ -3,12 +3,25 @@ import { IoMdAdd } from "react-icons/io";
 import { IoHomeOutline, IoStatsChart } from "react-icons/io5";
 import { FaCalendarAlt, FaRegTrashAlt } from "react-icons/fa";
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import {Theme}  from "../context/ThemeContext";
+import { AuthContext } from "../context/AuthProvider";
+import { auth } from "../firebaseConfig";
+import { signOut } from "firebase/auth";
 
 const Navbar = () => {
   const [theme, setTheme] = useContext(Theme);
-  
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout error:", error.message);
+    }
+  };
 
   return (
     <>
@@ -132,18 +145,33 @@ const Navbar = () => {
           </div>
         </div>
 
-        <button
-          onClick={() =>
-            setTheme((prev) => (prev === "dark" ? "light" : "dark"))
-          }
-          className={`${
-            theme === "dark"
-              ? "text-white hover:bg-slate-600"
-              : "text-[var(--color-textcolor)] hover:bg-slate-200"
-          } rightitems flex items-center text-lg p-2 rounded-md cursor-pointer`}
-        >
-          {theme === "dark" ? <MdOutlineLightMode /> : <MdOutlineDarkMode />}
-        </button>
+        <div className="rightitems flex items-center space-x-3">
+          <button
+            onClick={() =>
+              setTheme((prev) => (prev === "dark" ? "light" : "dark"))
+            }
+            className={`${
+              theme === "dark"
+                ? "text-white hover:bg-slate-600"
+                : "text-[var(--color-textcolor)] hover:bg-slate-200"
+            } text-lg p-2 rounded-md cursor-pointer`}
+          >
+            {theme === "dark" ? <MdOutlineLightMode /> : <MdOutlineDarkMode />}
+          </button>
+          
+          {user && (
+            <button
+              onClick={handleLogout}
+              className={`${
+                theme === "dark"
+                  ? "text-white hover:bg-slate-600"
+                  : "text-[var(--color-textcolor)] hover:bg-slate-200"
+              } text-sm px-3 py-1 rounded-md cursor-pointer border`}
+            >
+              Logout
+            </button>
+          )}
+        </div>
       </div>
 
 
